@@ -1,14 +1,26 @@
-# Usa una imagen base de Java 21
-FROM eclipse-temurin:21-jdk-alpine
+# Usa una imagen con Java y Maven
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
-# Crea un directorio de trabajo en el contenedor
+# Crea una carpeta para la app
 WORKDIR /app
 
-# Copia el jar compilado desde target/
-COPY target/tarea3Ysla-0.0.1-SNAPSHOT.jar app.jar
+# Copia los archivos del proyecto
+COPY pom.xml .
+COPY src ./src
 
-# Expón el puerto usado por Spring Boot
+# Compila el proyecto y crea el .jar
+RUN mvn clean package -DskipTests
+
+# Usa una imagen más ligera con Java para correr la app
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+# Copia el jar compilado desde la etapa anterior
+COPY --from=build /app/target/*.jar app.jar
+
+# Puerto que expone tu app (ajusta si usas otro)
 EXPOSE 8080
 
-# Comando para ejecutar la app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Comando para ejecutar
+CMD ["java", "-jar", "app.jar"]
