@@ -1,10 +1,25 @@
-HELP.md
+# Java
+*.class
+
+# Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+.mvn/timing.properties
 
-### STS ###
+# Spring Boot help file
+HELP.md
+
+# IDEs
+## IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+## VS Code
+.vscode/
+
+## STS (Spring Tool Suite)
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +28,24 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+## NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+
+# Build folders inside source (optional exclusions)
 !**/src/main/**/build/
 !**/src/test/**/build/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-### VS Code ###
-.vscode/
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment / Secrets / Misc
+.env
+*.log
+*.jar
